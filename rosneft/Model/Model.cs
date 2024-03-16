@@ -36,7 +36,7 @@ namespace rosneft.Model
         {
             ExcelPackage.LicenseContext = LicenseContext.Commercial;
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-            string file = "C:\\Users\\Lenovo\\source\\repos\\rosneft\\rosneft\\Model\\Data.xlsx";
+            string file = "Data.xlsx";
             List<int> year = new List<int>();
             List<int> flow = new List<int>();
 
