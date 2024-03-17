@@ -14,6 +14,10 @@ namespace rosneft.Model
 {
     internal class Model
     {
+        string file = "Data.xlsx";
+        int number_of_page = 1;
+
+
         private List<int> years;
         public List<int> Years
         {
@@ -36,16 +40,15 @@ namespace rosneft.Model
         {
             ExcelPackage.LicenseContext = LicenseContext.Commercial;
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-            string file = "Data.xlsx";
             List<int> year = new List<int>();
             List<int> flow = new List<int>();
 
             List<List<string>> data = new List<List<string>>();
 
-            using (ExcelPackage package = new ExcelPackage(new FileInfo(file)))
+            using (ExcelPackage package = new ExcelPackage(new FileInfo(this.file)))
             {
 
-                ExcelWorksheet worksheet = package.Workbook.Worksheets.ElementAt(1);
+                ExcelWorksheet worksheet = package.Workbook.Worksheets.ElementAt(this.number_of_page);
                 if (worksheet != null)
                 {
                     for (int i = 2; i <= worksheet.Dimension.End.Row; i++)
@@ -70,12 +73,9 @@ namespace rosneft.Model
         {
             double answer = 0;
             int len = last_year - years[0] + 1;
-            int j = 1;
             for (int i = 0; i < len; i++)
             {
-                double tmp = flow[i] * 1 / Math.Pow(1 + discont, j);
-                answer += tmp;
-                j++;
+                answer += flow[i] * 1 / Math.Pow(1 + discont, i+1);
             }
             return answer;
         }
